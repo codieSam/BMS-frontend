@@ -9,14 +9,21 @@ import toast, { Toaster } from "react-hot-toast";
 import EditBlog from "./components/EditBlog";
 import { useAppContext } from "../contexts/BlogContext";
 import { useEffect, useState } from "react";
-import ThemeToggle from "./components/ThemeToggle";
-import SideBarMenu from "./components/SideBarMenu";
 import Footer from "./components/Footer";
 
 function App() {
   // console.log("Samrat");
-  const { searchValue, setSearchValue, allBlogs, setAllBlogs, fetchAllBlogs } =
-    useAppContext();
+  const {
+    myTheme,
+    setMyTheme,
+    handleDarkTheme,
+    handleLightTheme,
+    searchValue,
+    setSearchValue,
+    allBlogs,
+    setAllBlogs,
+    fetchAllBlogs,
+  } = useAppContext();
 
   const handleSearchBar = () => {
     if (searchValue.length > 0) {
@@ -46,10 +53,16 @@ function App() {
   }, [searchValue]);
 
   return (
-    <div className="">
+    <div
+      className={`${
+        myTheme === "dark"
+          ? "bg-slate-900 translate duration-[250ms] text-white -tracking-tight"
+          : "-tracking-tight"
+      }`}
+    >
       {/* Navbar */}
 
-      <nav className="bg-slate-700 p-4 text-white">
+      <nav className="bg-[#9E96FC] p-4 text-white">
         <div className="flex justify-center space-x-12 md:space-x-0 items-center md:justify-between">
           <Link
             to={"/"}
@@ -83,7 +96,7 @@ function App() {
               <button
                 onClick={handleSearchBar}
                 type="submit"
-                className="bg-slate-500 hover:bg-slate-600 transition-all duration-[500ms] cursor-pointer w-32 h-[46px] rounded-md text-sm text-white"
+                className="bg-transparent border border-gray-200 hover:bg-[#62748E] transition-all duration-[500ms] cursor-pointer w-32 h-[46px] rounded-md text-sm text-white"
               >
                 Search
               </button>
@@ -100,12 +113,31 @@ function App() {
 
           <div className="hidden md:flex gap-4 mx-2 items-center justify-between">
             <Link to={"/blogs"} className="hover:text-gray-300 ">
-              <span className="border px-4 py-2.5 bg-transparent hover:bg-slate-600 hover:border-0 transition duration-[400ms] rounded-md">
-                New Byte
+              <span className="border px-4 py-2.5 bg-transparent hover:bg-[#5c4d64] hover:border-0 transition duration-[400ms] rounded-md">
+                New Byte +
               </span>
             </Link>
-            <div className="bo">
-              <ThemeToggle />
+            <div className="flex space-x-2">
+              <span
+                onClick={handleDarkTheme}
+                className={`${
+                  myTheme === "dark"
+                    ? "border px-3 py-1 text-white bg-[#62748E]  cursor-pointer rounded-full"
+                    : "border px-3 py-1 text-white  bg-transparent cursor-pointer rounded-full"
+                } `}
+              >
+                D
+              </span>
+              <span
+                onClick={handleLightTheme}
+                className={`${
+                  myTheme === "light"
+                    ? "border px-3 py-2 text-white  bg-[#62748E] cursor-pointer rounded-full"
+                    : "border px-3 py-2 text-white bg-transparent  cursor-pointer rounded-full"
+                } `}
+              >
+                B
+              </span>
             </div>
           </div>
         </div>
@@ -119,13 +151,11 @@ function App() {
           } `}
         >
           <Link to={"/blogs"} className="hover:text-gray-300 ">
-            <span className="border px-4 py-2.5 bg-transparent hover:bg-slate-600 hover:border-0 transition duration-[400ms] rounded-md">
+            <span className="border px-4 py-2.5 bg-transparent hover:bg-[#745C80] hover:border-0 transition duration-[400ms] rounded-md">
               New Byte
             </span>
           </Link>
-          <div className="">
-            <ThemeToggle />
-          </div>
+          <div className=""></div>
         </div>
 
         {/* Side bar menu logic */}

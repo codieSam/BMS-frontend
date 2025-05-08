@@ -20,14 +20,14 @@ const BlogList = () => {
             <button
               onClick={() => editBlog(blog.id, blog)}
               type="button"
-              className="bg-slate-500 cursor-pointer mt-4 mb-3 ml-2 px-6 py-2 font-medium rounded text-white"
+              className="bg-slate-500 hover:bg-slate-600 transition duration-[300ms] cursor-pointer mt-4 mb-3 ml-2 px-6 py-2 font-medium rounded text-white"
             >
               Edit
             </button>
             <button
               onClick={() => deleteBlog(blog.id)}
               type="button"
-              className="bg-red-500 cursor-pointer mt-4 mb-3 ml-2 px-6 py-2 font-medium rounded text-white"
+              className="bg-red-400 hover:bg-red-500 transition duration-[300ms] cursor-pointer mt-4 mb-3 ml-2 px-6 py-2 font-medium rounded text-white"
             >
               Delete
             </button>

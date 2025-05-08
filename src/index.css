@@ -4,6 +4,7 @@
   font-family: "Poppins", sans-serif;
 }
 #root {
-  background-color: rgb(223, 217, 228);
+  background: linear-gradient(to right, #ffffff, #dfdee7);
+  height: 100vh;
   height: 100vh;
 }

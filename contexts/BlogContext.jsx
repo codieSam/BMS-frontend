@@ -10,12 +10,6 @@ export const AppContextProvider = ({ children }) => {
   const [allBlogs, setAllBlogs] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
-  const [myTheme, setMyTheme] = useState(false);
-
-  const toggleTheme = () => {
-    setMyTheme(!myTheme);
-    console.log(myTheme);
-  };
 
   const saveBlog = () => {
     console.log("Vlog Saved");
@@ -89,13 +83,24 @@ export const AppContextProvider = ({ children }) => {
     navigate("/");
   };
 
+  const [myTheme, setMyTheme] = useState("light");
+
+  const handleDarkTheme = () => {
+    setMyTheme("dark");
+  };
+  const handleLightTheme = () => {
+    setMyTheme("light");
+  };
+
   useEffect(() => {
     fetchAllBlogs();
   }, []);
 
   const value = {
     myTheme,
-    toggleTheme,
+    setMyTheme,
+    handleDarkTheme,
+    handleLightTheme,
     title,
     setTitle,
     description,

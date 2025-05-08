@@ -19,6 +19,7 @@ export const AppContextProvider = ({ children }) => {
         console.log(response.data);
         setIsSubmitted(true);
         navigate("/");
+        fetchAllBlogs();
         toast.success("Blog added successfully !");
       })
       .catch((e) => {
@@ -64,17 +65,21 @@ export const AppContextProvider = ({ children }) => {
       });
   };
 
-  const editBlog = (id, updatedData) => {
+  const editBlog = (id) => {
+    navigate(`/blogs/${id}`);
+  };
+
+  const updateBlog = async (id, updatedData) => {
     console.log("Updating", id, updatedData);
-    blogServices
+    await blogServices
       .update(id, updatedData)
-      .then((response) => {})
+      .then(() => {
+        fetchAllBlogs();
+      })
       .catch((e) => {
         console.error(e);
-        setAllBlogs(updatedData);
-        fetchAllBlogs();
-        navigate(`/blogs/`);
       });
+    navigate("/");
   };
 
   useEffect(() => {
@@ -93,6 +98,7 @@ export const AppContextProvider = ({ children }) => {
     navigate,
     deleteBlog,
     editBlog,
+    updateBlog,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

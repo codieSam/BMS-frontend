@@ -6,9 +6,10 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import AddBlog from "./components/AddBlog";
 import BlogList from "./components/BlogList";
 import { Toaster } from "react-hot-toast";
+import EditBlog from "./components/EditBlog";
 
 function App() {
-  console.log("Samrat");
+  // console.log("Samrat");
   return (
     <>
       {/* Navbar */}
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<BlogList />} />
           <Route path="/blogs" element={<AddBlog />} />
+          <Route path="/blogs/:id" element={<EditBlog />} />
         </Routes>
       </div>
     </>

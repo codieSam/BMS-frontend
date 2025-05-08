@@ -1,17 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppContext } from "../../contexts/BlogContext";
+import { data, useParams } from "react-router-dom";
+import { all } from "axios";
 
 const EditBlog = () => {
-  const {allBlogs title, setTitle, description, setDescription, editBlog, navigate } =
-    useAppContext();
+  const {
+    allBlogs,
+    title,
+    setTitle,
+    description,
+    setDescription,
+    editBlog,
+    navigate,
+    updateBlog,
+  } = useAppContext();
+
+  //   const [editingId, setEditingId] = useState(null);
+
+  //   const handleUpdate = () => {
+  //     setEditingId =
+  //   };
+
+  const { id } = useParams();
+
+  const previousData = allBlogs.filter((item) => Number(id) === item.id);
 
   const [updatedTitle, setUpdatedTitle] = useState("");
   const [updatedDesc, setUpdatedDesc] = useState("");
-  const [editingId, setEditingId] = useState(null);
 
-  const handleUpdate = () => {
-    setEditingId = 
+  const oldData = () => {
+    console.log(previousData);
+    setUpdatedTitle(previousData[0].title || "");
+    setUpdatedDesc(previousData[0].description || "");
+    console.log(updatedTitle, updatedDesc);
   };
+  const newData = [{ title: updatedTitle, description: updatedDesc }];
+  const updatedData = newData[0];
+  useEffect(() => {
+    if (previousData.length > 0) {
+      oldData();
+    }
+  }, []);
 
   return (
     <div className="mt-12">
@@ -23,7 +52,7 @@ const EditBlog = () => {
             <input
               type="text"
               className="border border-gray-300 w-full px-2 p-1"
-              value={title}
+              value={updatedTitle}
               onChange={(e) => setUpdatedTitle(e.target.value)}
             />
           </div>
@@ -32,7 +61,7 @@ const EditBlog = () => {
             <input
               type="text"
               className="border border-gray-300 w-full px-2 py-1"
-              value={description}
+              value={updatedDesc}
               onChange={(e) => {
                 setUpdatedDesc(e.target.value);
               }}
@@ -41,7 +70,7 @@ const EditBlog = () => {
 
           <button
             className="bg-green-500 text-white cursor-pointer hover:bg-green-400 px-3 py-1.5 rounded mt-2"
-            onClick={() => editBlog(updatedTitle, updatedDesc)}
+            onClick={() => updateBlog(id, updatedData)}
           >
             Update
           </button>

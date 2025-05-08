@@ -16,7 +16,7 @@ const create = (data) => {
 };
 
 const update = (id, data) => {
-  return http.put(`/blogs/${id}`, data);
+  return http.patch(`/blogs/${id}`, data);
 };
 
 const remove = (id) => {

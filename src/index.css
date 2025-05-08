@@ -3,3 +3,7 @@
 * {
   font-family: "Poppins", sans-serif;
 }
+#root {
+  background-color: rgb(223, 217, 228);
+  height: 100vh;
+}

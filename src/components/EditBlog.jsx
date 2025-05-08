@@ -32,7 +32,6 @@ const EditBlog = () => {
     console.log(previousData);
     setUpdatedTitle(previousData[0].title || "");
     setUpdatedDesc(previousData[0].description || "");
-    console.log(updatedTitle, updatedDesc);
   };
   const newData = [{ title: updatedTitle, description: updatedDesc }];
   const updatedData = newData[0];
@@ -40,7 +39,7 @@ const EditBlog = () => {
     if (previousData.length > 0) {
       oldData();
     }
-  }, []);
+  });
 
   return (
     <div className="mt-12">

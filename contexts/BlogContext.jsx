@@ -8,7 +8,13 @@ export const AppContextProvider = ({ children }) => {
   const [description, setDescription] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [allBlogs, setAllBlogs] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
+  const [myTheme, setMyTheme] = useState(false);
+
+  const toggleTheme = () => {
+    setMyTheme(!myTheme);
+  };
 
   const saveBlog = () => {
     console.log("Vlog Saved");
@@ -74,7 +80,7 @@ export const AppContextProvider = ({ children }) => {
     await blogServices
       .update(id, updatedData)
       .then(() => {
-        fetchAllBlogs();
+        // fetchAllBlogs();
       })
       .catch((e) => {
         console.error(e);
@@ -87,6 +93,7 @@ export const AppContextProvider = ({ children }) => {
   }, []);
 
   const value = {
+    toggleTheme,
     title,
     setTitle,
     description,
@@ -99,6 +106,8 @@ export const AppContextProvider = ({ children }) => {
     deleteBlog,
     editBlog,
     updateBlog,
+    searchValue,
+    setSearchValue,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

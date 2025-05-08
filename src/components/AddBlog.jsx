@@ -14,7 +14,7 @@ const AddBlog = () => {
             <input
               type="text"
               className="border border-gray-300 w-full px-2 p-1"
-              value={title}
+              // value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
@@ -23,7 +23,7 @@ const AddBlog = () => {
             <input
               type="text"
               className="border border-gray-300 w-full px-2 py-1"
-              value={description}
+              // value={description}
               onChange={(e) => {
                 setDescription(e.target.value);
               }}

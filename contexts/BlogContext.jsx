@@ -14,6 +14,7 @@ export const AppContextProvider = ({ children }) => {
 
   const toggleTheme = () => {
     setMyTheme(!myTheme);
+    console.log(myTheme);
   };
 
   const saveBlog = () => {
@@ -93,6 +94,7 @@ export const AppContextProvider = ({ children }) => {
   }, []);
 
   const value = {
+    myTheme,
     toggleTheme,
     title,
     setTitle,

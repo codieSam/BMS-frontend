@@ -8,18 +8,16 @@ import BlogList from "./components/BlogList";
 import toast, { Toaster } from "react-hot-toast";
 import EditBlog from "./components/EditBlog";
 import { useAppContext } from "../contexts/BlogContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ThemeToggle from "./components/ThemeToggle";
+import SideBarMenu from "./components/SideBarMenu";
+import Footer from "./components/Footer";
 
 function App() {
   // console.log("Samrat");
-  const {
-    toggleTheme,
-    searchValue,
-    setSearchValue,
-    allBlogs,
-    setAllBlogs,
-    fetchAllBlogs,
-  } = useAppContext();
+  const { searchValue, setSearchValue, allBlogs, setAllBlogs, fetchAllBlogs } =
+    useAppContext();
+
   const handleSearchBar = () => {
     if (searchValue.length > 0) {
       const searchedBlogs = allBlogs.filter((item) =>
@@ -35,23 +33,37 @@ function App() {
     // console.log("Searched Blogs are", allBlogs);
   };
 
+  const [isMenu, setIsMenu] = useState(false);
+
+  const handleMenu = () => {
+    setIsMenu(!isMenu);
+    console.log("Menu is", isMenu);
+  };
+
   useEffect(() => {
     handleSearchBar();
     // fetchAllBlogs();
   }, [searchValue]);
 
   return (
-    <>
+    <div className="">
       {/* Navbar */}
 
-      <nav className="bg-orange-600 p-4 text-white">
-        <div className="flex space-x-6 justify-between items-center">
-          <Link to={"/"} className="hover:text-gray-300 font-bold text-2xl">
-            Blogs
+      <nav className="bg-slate-700 p-4 text-white">
+        <div className="flex justify-center space-x-12 md:space-x-0 items-center md:justify-between">
+          <Link
+            to={"/"}
+            className="hover:text-gray-300 hover:transition-all duration-[500ms] font-bold text-2xl"
+          >
+            <img
+              className="h-16 w-20 rounded-[100%] shadow-lg shadow-gray-800 "
+              src="../assets/logo.png"
+              alt=""
+            />
           </Link>
           <div className="">
             <div className="flex items-center gap-3 max-w-md w-full ">
-              <div className="flex items-center w-full border pl-3 gap-2 bg-white border-gray-500/30 h-[46px] rounded-md overflow-hidden">
+              <div className="flex items-center border w-50 p-1 md:w-full  md:pl-3 gap-1 bg-white border-gray-500/30 h-[46px] rounded-md overflow-hidden">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="23"
@@ -65,28 +77,58 @@ function App() {
                   onChange={(e) => setSearchValue(e.target.value)}
                   type="text"
                   placeholder="Search by title"
-                  className="w-full h-full outline-none text-gray-500 placeholder-gray-500 text-sm"
+                  className="w-auto sm:w- md:w-full h-full outline-none text-gray-500 placeholder-gray-500 text-sm"
                 />
               </div>
               <button
                 onClick={handleSearchBar}
                 type="submit"
-                className="bg-green-500 cursor-pointer w-32 h-[46px] rounded-md text-sm text-white"
+                className="bg-slate-500 hover:bg-slate-600 transition-all duration-[500ms] cursor-pointer w-32 h-[46px] rounded-md text-sm text-white"
               >
                 Search
               </button>
             </div>
           </div>
-          <Link to={"/blogs"} className="hover:text-gray-300 ">
-            <span className="border px-4 py-2 bg-transparent hover:bg-amber-600 rounded-md">
-              New Blog
+          <div className="">
+            <span
+              onClick={handleMenu}
+              className="md:hidden cursor-pointer bg-transparent border px-3 py-2 rounded-e-full "
+            >
+              Menu
             </span>
-          </Link>
-          <div className="bo">
-            <span onClick={toggleTheme}>D</span>
-            <span onClick={toggleTheme}>L</span>
+          </div>
+
+          <div className="hidden md:flex gap-4 mx-2 items-center justify-between">
+            <Link to={"/blogs"} className="hover:text-gray-300 ">
+              <span className="border px-4 py-2.5 bg-transparent hover:bg-slate-600 hover:border-0 transition duration-[400ms] rounded-md">
+                New Byte
+              </span>
+            </Link>
+            <div className="bo">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
+        {/* Side bar menu logic */}
+
+        <div
+          className={`${
+            !isMenu
+              ? "hidden "
+              : "opacity-100 md:opacity-0 ease-in-out duration-[400ms] flex flex-col gap-12 mx-2 w-full items-center justify-center h-[200px] md:h-0"
+          } `}
+        >
+          <Link to={"/blogs"} className="hover:text-gray-300 ">
+            <span className="border px-4 py-2.5 bg-transparent hover:bg-slate-600 hover:border-0 transition duration-[400ms] rounded-md">
+              New Byte
+            </span>
+          </Link>
+          <div className="">
+            <ThemeToggle />
+          </div>
+        </div>
+
+        {/* Side bar menu logic */}
       </nav>
 
       <Toaster></Toaster>
@@ -98,7 +140,11 @@ function App() {
           <Route path="/blogs/:id" element={<EditBlog />} />
         </Routes>
       </div>
-    </>
+
+      <div className="">
+        <Footer />
+      </div>
+    </div>
   );
 }
 

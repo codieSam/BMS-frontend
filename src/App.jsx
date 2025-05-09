@@ -155,7 +155,28 @@ function App() {
               New Byte
             </span>
           </Link>
-          <div className=""></div>
+          <div className="flex space-x-2">
+            <span
+              onClick={handleDarkTheme}
+              className={`${
+                myTheme === "dark"
+                  ? "border px-3 py-1 text-white bg-[#62748E]  cursor-pointer rounded-full"
+                  : "border px-3 py-1 text-white  bg-transparent cursor-pointer rounded-full"
+              } `}
+            >
+              D
+            </span>
+            <span
+              onClick={handleLightTheme}
+              className={`${
+                myTheme === "light"
+                  ? "border px-3 py-2 text-white  bg-[#62748E] cursor-pointer rounded-full"
+                  : "border px-3 py-2 text-white bg-transparent  cursor-pointer rounded-full"
+              } `}
+            >
+              B
+            </span>
+          </div>
         </div>
 
         {/* Side bar menu logic */}

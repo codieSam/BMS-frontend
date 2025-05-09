@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between w-full gap-10 border-b border-gray-500/30 pb-6">
           <div className="md:max-w-96">
             <img
-              className="h-12 rounded-[100%] shadow-lg shadow-gray-800"
+              className="h-12 rounded-[50%] shadow-lg shadow-gray-800"
               src="../assets/logo.png"
               alt="dummyLogoDark"
             />
@@ -47,7 +47,7 @@ const Footer = () => {
                   <input
                     className="border border-gray-200/30 placeholder-gray-100 outline-none w-full max-w-64 h-9 rounded px-2"
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder="It will wrok soon,stay tuned !"
                   />
                   <button className="bg-slate-600 cursor-pointer w-24 h-9 text-white rounded">
                     Subscribe

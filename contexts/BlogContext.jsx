@@ -75,12 +75,14 @@ export const AppContextProvider = ({ children }) => {
     await blogServices
       .update(id, updatedData)
       .then(() => {
-        // fetchAllBlogs();
+        fetchAllBlogs();
       })
       .catch((e) => {
         console.error(e);
       });
     navigate("/");
+    toast.success("Byte has been updated successfully 🤝");
+    // fetchAllBlogs();
   };
 
   const [myTheme, setMyTheme] = useState("light");

@@ -39,7 +39,7 @@ const EditBlog = () => {
     if (previousData.length > 0) {
       oldData();
     }
-  });
+  }, []);
 
   return (
     <div className="mt-12">
@@ -61,9 +61,7 @@ const EditBlog = () => {
               type="text"
               className="border border-gray-300 w-full px-2 py-1"
               value={updatedDesc}
-              onChange={(e) => {
-                setUpdatedDesc(e.target.value);
-              }}
+              onChange={(e) => setUpdatedDesc(e.target.value)}
             />
           </div>
 
